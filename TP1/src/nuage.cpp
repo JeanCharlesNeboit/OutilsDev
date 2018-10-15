@@ -29,7 +29,7 @@ Cartesien barycentre(Nuage& n) {
   double y = 0;
   Cartesien c;
   for(Nuage::const_iterator it = n.begin(); it != n.end(); ++it) {
-    (*(it))->convertir(c);
+    (*it)->convertir(c);
     x += c.getX();
     y += c.getY();
   }
