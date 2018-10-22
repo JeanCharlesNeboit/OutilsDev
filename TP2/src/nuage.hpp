@@ -15,29 +15,22 @@ public:
   Nuage();
   ~Nuage();
 
-  typedef typename std::vector<T>::const_iterator const_iterator;
-  using container = std::vector
+  //typedef typename std::vector<T>::const_iterator const_iterator;
+  using const_iterator = typename std::vector<T>::const_iterator;
+  using value_type = T;
+
   const_iterator begin() const;
   const_iterator end() const;
 
-  int size();
+  int size() const;
   void ajouter(const T);
 };
 
 template<typename T>
-class BarycentreCartesien {
-public:
-  Cartesien operator()(Nuage<T>&);
-};
+T barycentre_v1(const Nuage<T>&);
 
 template<typename T>
-class BarycentrePolaire {
-public:
-  Polaire operator()(Nuage<T>&);
-};
-
-template<typename T>
-T barycentre_v1(Nuage<T>&);
+typename T::value_type barycentre_v2(const T&);
 
 #include <nuage.hxx>
 

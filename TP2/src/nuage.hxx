@@ -11,7 +11,7 @@ Nuage<T>::~Nuage() {
 }
 
 template<typename T>
-int Nuage<T>::size() {
+int Nuage<T>::size() const {
   return points.size();
 }
 
@@ -31,11 +31,11 @@ typename Nuage<T>::const_iterator Nuage<T>::end() const {
 }
 
 template<typename T>
-T barycentre_v1(Nuage<T>& n) {
+T barycentre_v1(const Nuage<T>& n) {
   if (n.size() == 0) {
 	  return T(0,0);
   }
-  
+
   double x = 0;
   double y = 0;
   Cartesien c;
@@ -44,17 +44,41 @@ T barycentre_v1(Nuage<T>& n) {
     x += c.getX();
     y += c.getY();
   }
-  return Cartesien(x/n.size(), y/n.size());
+
+  return T(Cartesien(x/n.size(), y/n.size()));
 }
 
-template<typename T>
-Cartesien BarycentreCartesien<T>::operator()(Nuage<T> &n) {
-  return barycentre(n);
-}
+/*template<>
+Polaire barycentre_v1(const Nuage<Polaire>& n) {
+  if (n.size() == 0) {
+	  return Polaire(0,0);
+  }
+
+  double distance = 0;
+  double angle = 0;
+  for(typename Nuage<Polaire>::const_iterator it = n.begin(); it != n.end(); ++it) {
+    distance += (*it).getDistance();
+    angle += (*it).getAngle();
+  }
+
+  return Polaire(angle/n.size(), distance/n.size());
+}*/
 
 template<typename T>
-Polaire BarycentrePolaire<T>::operator()(Nuage<T> &n) {
-  Polaire p;
-  barycentre(n).convertir(p);
-  return p;
+typename T::value_type barycentre_v2(const T& n) {
+  typedef typename T::value_type valueType;
+  if (n.size() == 0) {
+    return valueType(0, 0);
+  }
+
+  double x = 0;
+  double y = 0;
+  Cartesien c;
+  for(typename T::const_iterator it = n.begin(); it != n.end(); ++it) {
+    (*it).convertir(c);
+    x += c.getX();
+    y += c.getY();
+  }
+
+  return valueType(Cartesien(x/n.size(), y/n.size()));
 }
