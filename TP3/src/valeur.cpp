@@ -1,10 +1,10 @@
 #include <valeur.hpp>
 
-Valeur::Valeur() : real(0.0) {
+Valeur::Valeur() : real(0.0), nom("inconnu") {
 
 }
 
-Valeur::Valeur(int x) : real(x) {
+Valeur::Valeur(double x, std::string n) : real(x), nom(n) {
 
 }
 

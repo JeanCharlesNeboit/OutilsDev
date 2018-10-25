@@ -13,7 +13,7 @@ private:
 public:
   Echantillon();
 
-  int getTaille() { return vecteur.size(); }
+  int getTaille() const { return vecteur.size(); }
   void ajouter(Valeur);
   Valeur getMinimum() const;
   Valeur getMaximum() const;

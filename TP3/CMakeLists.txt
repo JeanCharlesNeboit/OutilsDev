@@ -35,7 +35,7 @@ message ( STATUS "Compiler flags: ${CMAKE_CXX_FLAGS}" )
 # Sources #-----------------------------------------------------------------------------------------
 set ( ZZ3_HEADERS
       src/classe.hpp
-      #src/comparateur_quantite.hpp
+      src/comparateurQuantite.hpp
       src/echantillon.hpp
       src/histogramme.hpp
       src/valeur.hpp
@@ -45,7 +45,6 @@ set ( ZZ3_SOURCES
       src/echantillon.cpp
       src/valeur.cpp
       src/classe.cpp
-      src/histogramme.cpp
     )
 
 set ( ZZ3_HEADERS_TEST
