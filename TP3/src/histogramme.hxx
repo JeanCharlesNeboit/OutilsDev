@@ -39,18 +39,21 @@ void Histogramme<T>::ajouter(double & v) {
   if (it != container.end()) {
     it->ajouter();
     ajouter_valeur(*it, v);
-    reordering();
   }
 }
 
 template<typename T>
 void Histogramme<T>::ajouter_valeur(Classe c, Valeur v) {
   valeurs.insert(std::make_pair(c, v));
+  reordering();
 }
 
 template<typename T>
 void Histogramme<T>::reordering() {
-  ContainerType c(container);
+  ContainerType c;
+  for(typename ContainerType::const_iterator it=container.begin(); it!=container.end(); ++it) {
+    c.insert(*it);
+  }
   container.swap(c);
 }
 
