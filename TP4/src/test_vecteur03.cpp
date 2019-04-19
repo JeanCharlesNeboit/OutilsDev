@@ -10,8 +10,20 @@ int main(void) {
 
  complexe_t::stats();
 
- for (unsigned i = 0; i<v1.getTaille(); ++i) v1[i]=complexe_t(10*i,i*i);
- for (unsigned i = 0; i<v2.getTaille(); ++i) v2[i]=complexe_t(i,i+1);
+ /* C++03 */
+ /*for (unsigned i = 0; i<v1.getTaille(); ++i) v1[i]=complexe_t(10*i,i*i);
+ for (unsigned i = 0; i<v2.getTaille(); ++i) v2[i]=complexe_t(i,i+1);*/
+ /* C++11 */
+ int i =0;
+ std::for_each(v1.begin(), v2.end(), [&](complexe_t&){
+   v1[i] = complexe_t(10*i,i*i);
+   ++i;
+ });
+ i=0;
+ std::for_each(v2.begin(), v2.end(), [&](complexe_t){
+   v2[i] = complexe_t(i,i+1);
+   ++i;
+ });
 
  std::cout << std::endl << "v1 = " << v1 << std::endl;
  std::cout << "v2 = " << v2 << std::endl;

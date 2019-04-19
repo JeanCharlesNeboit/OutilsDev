@@ -5,6 +5,7 @@
 // Entetes //---------------------------------------------------------------------------------------
 #include <complexe.hpp>
 #include <stdexcept>
+#include <iterator>
 
 // Classe  V e c t e u r //-------------------------------------------------------------------------
 class Vecteur {
@@ -27,7 +28,27 @@ class Vecteur {
    throw std::out_of_range("");
   }
 
- public:
+  //---------------------------------------------------------------------------------------Iterators
+  private:
+    class Iterator : public std::iterator<std::input_iterator_tag, int>
+    {
+      complexe_t* p;
+      public:
+        Iterator(complexe_t* x) :p(x) {}
+        Iterator(const Iterator& mit) : p(mit.p) {}
+        Iterator& operator++() {++p;return *this;}
+        Iterator operator++(int) {Iterator tmp(*this); operator++(); return tmp;}
+        bool operator==(const Iterator& rhs) const {return p==rhs.p;}
+        bool operator!=(const Iterator& rhs) const {return p!=rhs.p;}
+        complexe_t & operator*() {return *p;}
+    };
+
+  public:
+    using iterator = Iterator;
+    iterator begin() { return iterator(tableau_); }
+    iterator end() { return iterator(tableau_ + taille_); }
+
+  public:
   //-----------------------------------------------------------------------------Constructeur defaut
   explicit Vecteur(unsigned t = 10) : taille_(t),tableau_(new complexe_t[taille_]) {}
 

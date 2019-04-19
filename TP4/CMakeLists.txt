@@ -1,5 +1,5 @@
 # Project #-----------------------------------------------------------------------------------------
-project ( tp2 )
+project ( tp4 )
 
 cmake_minimum_required ( VERSION 2.8.9 )
 
@@ -34,21 +34,12 @@ message ( STATUS "Compiler flags: ${CMAKE_CXX_FLAGS}" )
 
 # Sources #-----------------------------------------------------------------------------------------
 set ( ZZ3_HEADERS
-      src/cartesien.hpp
-      #src/cosinus.hpp
-      src/exponentielle.hpp
-      src/factorielle.hpp
-      src/nuage.hpp
-      src/point.hpp
-      src/polaire.hpp
-      src/puissance.hpp
-      src/meta_function.hpp
+      src/vecteur03.hpp
+      src/mouchard.hpp
+      src/complexe.hpp
     )
 
 set ( ZZ3_SOURCES
-      src/cartesien.cpp
-      src/point.cpp
-      src/polaire.cpp
     )
 
 set ( ZZ3_HEADERS_TEST
@@ -60,21 +51,14 @@ set ( ZZ3_SOURCES_TEST
 include_directories ( src/ )
 
 # Executables #-------------------------------------------------------------------------------------
-add_executable ( ${CMAKE_PROJECT_NAME}_metaprog
-                 src/main_metaprog.cpp
+add_executable ( ${CMAKE_PROJECT_NAME}_vecteur
+                 src/test_vecteur03.cpp
                  ${ZZ3_HEADERS}
                  ${ZZ3_SOURCES}
                )
 
-add_executable ( ${CMAKE_PROJECT_NAME}_nuage
-                 src/main_nuage.cpp
-                 ${ZZ3_HEADERS}
-                 ${ZZ3_SOURCES}
-               )
-
-add_executable ( ${CMAKE_PROJECT_NAME}_test
-                 test/catch.cpp
-                 test/${CMAKE_PROJECT_NAME}_test.cpp
+add_executable ( ${CMAKE_PROJECT_NAME}_mouchard
+                 src/test_mouchard.cpp
                  ${ZZ3_HEADERS}
                  ${ZZ3_SOURCES}
                  ${ZZ3_HEADERS_TEST}
@@ -82,11 +66,8 @@ add_executable ( ${CMAKE_PROJECT_NAME}_test
                )
 
 # Build #-------------------------------------------------------------------------------------------
-set_target_properties ( ${CMAKE_PROJECT_NAME}_metaprog PROPERTIES LINKER_LANGUAGE C )
-target_link_libraries ( ${CMAKE_PROJECT_NAME}_metaprog ${CMAKE_THREAD_LIBS_INIT} )
+set_target_properties ( ${CMAKE_PROJECT_NAME}_vecteur PROPERTIES LINKER_LANGUAGE C )
+target_link_libraries ( ${CMAKE_PROJECT_NAME}_vecteur ${CMAKE_THREAD_LIBS_INIT} )
 
-set_target_properties ( ${CMAKE_PROJECT_NAME}_nuage PROPERTIES LINKER_LANGUAGE C )
-target_link_libraries ( ${CMAKE_PROJECT_NAME}_nuage ${CMAKE_THREAD_LIBS_INIT} )
-
-set_target_properties ( ${CMAKE_PROJECT_NAME}_test PROPERTIES LINKER_LANGUAGE C )
-target_link_libraries ( ${CMAKE_PROJECT_NAME}_test ${CMAKE_THREAD_LIBS_INIT} )
+set_target_properties ( ${CMAKE_PROJECT_NAME}_mouchard PROPERTIES LINKER_LANGUAGE C )
+target_link_libraries ( ${CMAKE_PROJECT_NAME}_mouchard ${CMAKE_THREAD_LIBS_INIT} )
